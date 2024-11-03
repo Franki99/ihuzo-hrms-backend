@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #ddddf1;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        p {
+            color: #666;
+            font-size: 16px;
+        }
+        .container{
+            background-color: #fcfcfc;
+            max-width: 400px;
+            margin: auto;
+            padding: 30px;
+            border-radius: 8px;
+        }
+        .footer {
+            text-align: center;
+            font-size: 14px;
+        }
+        .greeting{
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div>
+        <img src="https://pbs.twimg.com/profile_images/1788231088302653440/5xKfAdI8_200x200.jpg" width="40" height="40" alt="Logo" />
+    </div>
+    <p class="greeting">Dear <span th:text="${recipient}">--</span>, </p>
+    <div th:text="${message}">--</div>
+    <p class="footer">&copy;Rwanda Premier League, 2024</p>
+</div>
+</body>
+</html>
