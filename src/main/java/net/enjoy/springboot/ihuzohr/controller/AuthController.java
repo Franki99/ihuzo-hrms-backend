@@ -59,7 +59,8 @@ public class AuthController {
             return "/register";
         }
 
-        userService.saveUser(userDto);
+//        userService.saveUser(userDto);
+        userServiceImpl.saveAdminUser(userDto);
         return "redirect:/dashboard";
     }
 

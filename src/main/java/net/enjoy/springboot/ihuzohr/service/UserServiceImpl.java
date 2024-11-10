@@ -42,6 +42,29 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
+    public void saveAdminUser(UserDto userDto) {
+        User user = new User();
+        user.setFirstName(userDto.getFirstName());
+        user.setLastName(userDto.getLastName());
+        user.setEmail(userDto.getEmail());
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        user.setPhoneNumber(userDto.getPhoneNumber());
+        user.setDateOfBirth(userDto.getDateOfBirth());
+
+        Role adminRole = roleRepository.findByName("ROLE_ADMIN");
+        if (adminRole == null) {
+            adminRole = checkRoleExist("ROLE_ADMIN");
+        }
+        user.setRoles(List.of(adminRole));
+        userRepository.save(user);
+    }
+
+    private Role checkRoleExist(String roleName) {
+        Role role = new Role();
+        role.setName(roleName);
+        return roleRepository.save(role);
+    }
+
     @Override
     public User findUserByEmail(String email) {
         return userRepository.findByEmail(email);
