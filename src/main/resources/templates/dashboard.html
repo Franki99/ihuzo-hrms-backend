@@ -5,194 +5,390 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RWANDA PREMIER LEAGUE - Dashboard</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
   <style>
-    /* General Styling */
+    /* Dark Mode Styling */
     body {
-      background-color: #f4f7fc;
+      background-color: #121212;
+      color: #e0e0e0;
       font-family: 'Roboto', sans-serif;
     }
 
     .navbar {
-            background: linear-gradient(90deg,  #2c5282, #4299e1);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      background: linear-gradient(90deg, #090979, #0009ff, #00d4ff);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 15px;
+    }
+
+    .navbar-brand {
+      color: #ffffff !important;
+      font-weight: bold;
+    }
+
+    .nav-link {
+      color: #ffffff !important;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 8px 15px;
+      margin: 0 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .nav-link:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Enhanced Card Styling */
+        .card {
+            border: none;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+            background-color: #1e1e1e;
+            border-radius: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .navbar-brand {
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-header {
+            background: linear-gradient(90deg, #0009ff, #090979, #00d4ff) !important;
+            color: white;
             font-weight: bold;
-            font-size: 1.5rem;
-            color: #ffffff !important;
-            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            border-radius: 15px 15px 0 0 !important;
+            padding: 1.2rem;
         }
 
-        .nav-link {
-            font-size: 1.1rem;
-            color: #e3f2fd !important;
-            margin-left: 15px;
+        .card-body {
+            padding: 25px;
         }
 
-        .nav-link:hover {
-            color: #b2ebf2 !important;
+        /* Profile Section Styling */
+        .profile-section {
+            background-color: #1e1e1e;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 30px;
         }
 
-    /* Dashboard Header Styling */
-    .container h1 {
-      color: #2c5282;
-      font-weight: bold;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-    }
+        .profile-picture-container {
+            position: relative;
+            width: 18rem;
+            margin: 20px auto;
+        }
 
-    /* Card Styling */
-    .card {
-      border: none;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-      margin-top: 20px;
-    }
+        .profile-picture-card {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
 
-    .card-header {
-      background-color: #2c5282;
-      color: white;
-      font-weight: bold;
-      text-transform: uppercase;
-    }
+        .profile-picture {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px 15px 0 0;
+        }
 
-    .card-body {
-      padding: 20px;
-    }
+        .upload-form {
+            background-color: #252525;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+        }
 
-    /* Player Info Styling */
-    .card-body p {
-      font-size: 1.1rem;
-      margin-bottom: 15px;
-    }
+        /* Enhanced Button Styling */
+        .btn-primary {
+            background: linear-gradient(45deg, #0009ff, #00d4ff);
+            border: none;
+            border-radius: 25px;
+            padding: 10px 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
 
-    .card-body strong {
-      color: #2c5282;
-      font-weight: 600;
-    }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
+        }
 
-    /* Allowed Menus Styling */
-    h3 {
-      font-weight: bold;
-      margin-top: 10px;
-    }
+        /* Form Control Styling */
+        .form-control {
+            background-color: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            color: #e0e0e0;
+            border-radius: 10px;
+            padding: 12px;
+        }
 
-    ul {
-      list-style: none;
-      padding-left: 0;
-    }
+        .form-control:focus {
+            background-color: #2a2a2a;
+            border-color: #0009ff;
+            color: #e0e0e0;
+            box-shadow: 0 0 0 0.25rem rgba(0, 9, 255, 0.25);
+        }
 
+        /* Chart Container Enhancement */
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #1a1a1a;
+            border-radius: 15px;
+        }
 
-    /* Responsive Adjustments */
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 1.5rem;
-      }
+        /* Dropdown Menu Styling */
+        .dropdown-menu {
+            background-color: #1e1e1e;
+            border: 1px solid #333;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
 
-      .card-body p {
-        font-size: 1rem;
-      }
-    }
+        .dropdown-item {
+            color: #e0e0e0;
+            transition: background-color 0.3s ease;
+        }
+
+        .dropdown-item:hover {
+            background-color: #333;
+            color: #fff;
+        }
+
+        /* Welcome Text Enhancement */
+        .welcome-text {
+            background: linear-gradient(45deg, #0009ff, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        /* Info Text Enhancement */
+        .info-label {
+            color: #00d4ff;
+            font-weight: 600;
+            margin-right: 10px;
+        }
+
+        .info-value {
+            color: #e0e0e0;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .card-header {
+                padding: 1rem;
+            }
+
+            .welcome-text {
+                font-size: 2rem;
+            }
+
+            .chart-container {
+                height: 300px;
+            }
+        }
   </style>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg">
   <div class="container-fluid">
     <a class="navbar-brand" th:href="@{/}">
-      <img src="https://pbs.twimg.com/profile_images/1788231088302653440/5xKfAdI8_200x200.jpg" width="40" height="40" alt="rpl"/>
-      RWANDA PREMIER LEAGUE
+      <img src="https://i.pinimg.com/originals/3a/23/e6/3a23e6008d880405a27aa59b7072b097.jpg" width="40" height="40" alt="rpl"/>
+      Ihuzo Smart HR Tool
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item" th:if="${user.roles[0].name=='ROLE_ADMIN'}">
+        <li class="nav-item" th:if="${user.roles[0].name == 'ROLE_ADMIN'}">
           <a class="nav-link" th:href="@{/users}" th:text="#{players}">Players</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" th:href="@{/logout}" th:text="#{logout}">Logout</a>
         </li>
       </ul>
     </div>
     <ul class="navbar-nav">
+      <!-- Profile Icon with Email -->
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <span th:text="${#locale.language == 'en' ? 'English' : #locale.language == 'rw' ? 'Kinyarwanda' : 'Français'}"></span>
+        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="bi bi-person-circle" style="font-size: 30px;"></i> <!-- Icon Only -->
         </a>
-        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
-          <li><a class="dropdown-item" th:href="@{''(lang=en)}">English</a></li>
-          <li><a class="dropdown-item" th:href="@{''(lang=rw)}">Kinyarwanda</a></li>
-          <li><a class="dropdown-item" th:href="@{''(lang=fr)}">Français</a></li>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+          <!-- Email Displayed Below the Icon -->
+          <li>
+            <a class="dropdown-item" href="#">
+              <span th:text="${user.email}"></span> <!-- User Email -->
+            </a>
+          </li>
+          <!-- Players Link (only for Admins) -->
+          <li th:if="${user.roles[0].name == 'ROLE_ADMIN'}">
+            <a class="dropdown-item" th:href="@{/users}">
+              <i class="bi bi-people"></i> <span th:text="#{players}">Players</span>
+            </a>
+          </li>
+          <!-- Language Selection Dropdown -->
+          <li class="dropdown-item dropdown">
+            <a class="dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <span th:text="${#locale.language == 'en' ? 'English' : #locale.language == 'rw' ? 'Kinyarwanda' : 'Français'}"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" th:href="@{''(lang=en)}">English</a></li>
+              <li><a class="dropdown-item" th:href="@{''(lang=rw)}">Kinyarwanda</a></li>
+              <li><a class="dropdown-item" th:href="@{''(lang=fr)}">Français</a></li>
+            </ul>
+          </li>
+          <!-- Logout -->
+          <li>
+            <a class="dropdown-item" th:href="@{/logout}">
+              <i class="bi bi-box-arrow-right"></i> <span th:text="#{logout}">Logout</span>
+            </a>
+          </li>
         </ul>
       </li>
     </ul>
   </div>
-<!--  <div class="container-fluid">-->
-<!--    <a class="navbar-brand" th:href="@{/}"><img src="https://pbs.twimg.com/profile_images/1788231088302653440/5xKfAdI8_200x200.jpg" width="40" height="40" alt="rpl"/>RWANDA PREMIER LEAGUE</a>-->
-<!--    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
-<!--      <span class="navbar-toggler-icon"></span>-->
-<!--    </button>-->
-<!--    <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
-<!--      -->
-<!--    </div>-->
-<!--  </div>-->
 </nav>
 
+
 <div class="container mt-5">
-  <h1 class="mb-4" th:text="#{welcome}"></h1>
+  <h1 class="welcome-text" th:text="#{welcome}">Welcome</h1>
+
+  <!-- Goals Achievement Chart -->
   <div class="card">
-  <div class="card-header">
-    <h3 th:text="#{player_information}">Player Information</h3>
+    <div class="card-header">
+      <h3 class="mb-0">Goals Achievements</h3>
+    </div>
+    <div class="card-body">
+      <div class="chart-container">
+        <canvas id="matchesChart"></canvas>
+      </div>
+    </div>
   </div>
-  <div class="card-body">
-    <p><strong><span th:text="#{name_label}">Name</span>:</strong> <span th:text="${user.firstName + ' ' + user.lastName}"></span></p>
-    <p><strong><span th:text="#{email_label}">Email</span>:</strong> <span th:text="${user.email}"></span></p>
-    <p><strong><span th:text="#{role_label}">Role</span>:</strong> <span th:text="${user.roles[0].name}"></span></p>
-    <p><strong><span th:text="#{profile_picture}"></span>:</strong></p>
-    <div th:if="${user.profilePicture != null}">
-      <div class="card" style="width: 18rem;">
-        <img th:src="@{/download-profile(fileName=${user.profilePicture})}" class="card-img-top" alt="Profile Picture" style="object-fit: cover; height: 150px;">
-        <div class="card-body">
-          <a th:href="@{/download-profile(fileName=${user.profilePicture})}" class="btn btn-primary btn-block" th:text="#{download}">Download</a>
+
+  <!-- Employee Information Card -->
+  <div class="card mt-4">
+    <div class="card-header">
+      <h3 class="mb-0" th:text="#{player_information}">Employee Information</h3>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <p><span class="info-label" th:text="#{name_label}">Name</span>
+            <span class="info-value" th:text="${user.firstName + ' ' + user.lastName}"></span></p>
+          <p><span class="info-label" th:text="#{email_label}">Email</span>
+            <span class="info-value" th:text="${user.email}"></span></p>
+          <p><span class="info-label" th:text="#{role_label}">Role</span>
+            <span class="info-value" th:text="${user.roles[0].name}"></span></p>
+        </div>
+        <div class="col-md-6">
+          <div th:if="${user.profilePicture != null}" class="profile-picture-container">
+            <div class="profile-picture-card">
+              <img th:src="@{/download-profile(fileName=${user.profilePicture})}"
+                   class="profile-picture"
+                   alt="Profile Picture">
+              <div class="card-body text-center">
+                <a th:href="@{/download-profile(fileName=${user.profilePicture})}"
+                   class="btn btn-primary"
+                   th:text="#{download}">Download</a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-<!--    <div th:if="${user.profilePicture == null}">-->
-<!--      <p>No profile picture available.</p>-->
-<!--    </div>-->
 
-    <div th:if="${messageSuccess}" class="alert alert-success">
-      <p th:text="${messageSuccess}"></p>
-    </div>
-    <div th:if="${messageError}" class="alert alert-danger">
-      <p th:text="${messageError}"></p>
-    </div>
-
-    <div class="card mt-4">
-  <div class="card-body">
-    <form th:action="@{/uploadProfilePicture(userId=${user.id})}" method="post" enctype="multipart/form-data">
-      <div class="mb-3">
-        <label for="profilePicture" class="form-label" th:text="#{upload_profile}">Upload New Profile Picture</label>
-        <input class="form-control" type="file" id="profilePicture" name="profilePicture" accept="image/*">
+      <!-- Upload Form -->
+      <div class="upload-form mt-4">
+        <form th:action="@{/uploadProfilePicture(userId=${user.id})}"
+              method="post"
+              enctype="multipart/form-data">
+          <div class="mb-3">
+            <label for="profilePicture"
+                   class="form-label"
+                   th:text="#{upload_profile}">Upload New Profile Picture</label>
+            <input class="form-control"
+                   type="file"
+                   id="profilePicture"
+                   name="profilePicture"
+                   accept="image/*">
+          </div>
+          <button type="submit"
+                  class="btn btn-primary"
+                  th:text="#{upload}">Upload</button>
+        </form>
       </div>
-      <button type="submit" class="btn btn-primary" th:text="#{upload}">Upload</button>
-    </form>
-  </div>
-</div>
+    </div>
   </div>
 </div>
 
-  <div class="mt-4">
-    <h3 th:text="#{allowed_menus_label}">Allowed Menus:</h3>
-    <ul>
-      <li>Dashboard</li>
-      <li th:if="${user.roles[0].name=='ROLE_ADMIN'}" th:text="#{players}">Players</li>
-      <!-- Add more menu items based on user roles -->
-    </ul>
-  </div>
-</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const ctx = document.getElementById('matchesChart').getContext('2d');
+  const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+  gradient.addColorStop(0, 'rgba(0, 128, 255, 0.9)');
+  gradient.addColorStop(1, 'rgba(0, 0, 64, 0.3)');
 
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+      datasets: [{
+        label: 'Goals achieved ',
+        data: [12, 19, 15, 7, 22, 13],
+        backgroundColor: gradient,
+        borderColor: 'rgba(0, 128, 255, 1)',
+        borderWidth: 2,
+        borderRadius: 8,
+        barPercentage: 0.7,
+        categoryPercentage: 0.8,
+      }],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          labels: {
+            color: '#e0e0e0',
+            font: { size: 14 },
+          },
+        },
+        tooltip: {
+          backgroundColor: '#1e1e1e',
+          titleColor: '#e0e0e0',
+          bodyColor: '#e0e0e0',
+          borderColor: 'rgba(0, 128, 255, 1)',
+          borderWidth: 1,
+        },
+      },
+      scales: {
+        x: {
+          ticks: {
+            color: '#e0e0e0',
+            font: { size: 12 },
+          },
+          grid: { display: false },
+        },
+        y: {
+          ticks: {
+            color: '#e0e0e0',
+            font: { size: 12 },
+          },
+          grid: {
+            color: 'rgba(255, 255, 255, 0.1)',
+            borderDash: [5, 5],
+          },
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
