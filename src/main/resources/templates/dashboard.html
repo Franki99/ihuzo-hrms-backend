@@ -390,7 +390,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item" th:if="${user.roles[0].name == 'ROLE_ADMIN'}">
-          <a class="nav-link" th:href="@{/users}" th:text="#{players}">Players</a>
+          <a class="nav-link" th:href="@{/users}" th:text="#{players}">Employees</a>
         </li>
       </ul>
     </div>
@@ -410,7 +410,7 @@
           <!-- Players Link (only for Admins) -->
           <li th:if="${user.roles[0].name == 'ROLE_ADMIN'}">
             <a class="dropdown-item" th:href="@{/users}">
-              <i class="bi bi-people"></i> <span th:text="#{players}">Players</span>
+              <i class="bi bi-people"></i> <span th:text="#{players}">Employees</span>
             </a>
           </li>
           <!-- Language Selection Dropdown -->

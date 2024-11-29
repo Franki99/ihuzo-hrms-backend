@@ -5,107 +5,273 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RWANDA PREMIER LEAGUE - Players</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <style>
-        /* Body Styling */
-        body {
-            background: linear-gradient(to right, #2c5282, #4299e1);
-            font-family: 'Roboto', sans-serif;
-            min-height: 100vh;
+        /* Dark Mode Styling */
+    body {
+      background-color: #121212;
+      color: #e0e0e0;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    .navbar {
+      background: linear-gradient(90deg, #090979, #0009ff, #00d4ff);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 15px;
+    }
+
+    .navbar-brand {
+      color: #ffffff !important;
+      font-weight: bold;
+    }
+
+    .nav-link {
+      color: #ffffff !important;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 8px 15px;
+      margin: 0 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .nav-link:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Dropdown Menu Styling */
+        .dropdown-menu {
+            background-color: #1e1e1e;
+            border: 1px solid #333;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
 
-        /* Navbar Styling */
-        .navbar {
-            background-color: #2c5282;
+        .dropdown-item {
+            color: #e0e0e0;
+            transition: background-color 0.3s ease;
         }
 
-        .navbar-brand {
-            font-weight: bold;
-            color: white !important;
-        }
-
-        .nav-link {
-            color: white !important;
-        }
-
-        /* Header */
-        h1 {
+        .dropdown-item:hover {
+            background-color: #333;
             color: #fff;
-            text-align: center;
+        }
+
+        /* Enhanced Table Container */
+        .table-container {
+            background-color: #1e1e1e;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
             margin-top: 30px;
-            font-size: 36px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* Search Bar Enhancement */
+        .search-container {
+            background: #252525;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            background-color: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            color: #e0e0e0;
+            border-radius: 10px;
+            padding: 12px;
+        }
+
+        .form-control:focus {
+            background-color: #2a2a2a;
+            border-color: #0009ff;
+            color: #e0e0e0;
+            box-shadow: 0 0 0 0.25rem rgba(0, 9, 255, 0.25);
         }
 
         /* Table Styling */
-        .table-container {
-            background-color: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            margin-top: 30px;
+        .table {
+            color: #e0e0e0;
+            margin-bottom: 30px;
         }
 
         .table thead {
-            background-color: #2c5282;
+            background: linear-gradient(90deg, #0009ff, #090979, #00d4ff);
             color: white;
         }
 
-        .table thead a{
+        .table thead th {
+            padding: 15px;
+            font-weight: 600;
+            border: none;
+        }
+
+        .table thead a {
             text-decoration: none;
             color: white;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .table thead a:hover {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .table tbody tr {
+            border-bottom: 1px solid #333;
+            transition: all 0.3s ease;
         }
 
         .table tbody tr:hover {
-            background-color: #f1f1f1;
+            background-color: #2a2a2a;
+            transform: scale(1.01);
+        }
+
+        .table td {
+            padding: 15px;
+            vertical-align: middle;
         }
 
         /* Button Styling */
         .btn-primary {
-            background-color: #2c5282;
+            background: linear-gradient(45deg, #0009ff, #00d4ff);
             border: none;
+            border-radius: 25px;
+            padding: 8px 20px;
+            transition: all 0.3s ease;
         }
 
         .btn-primary:hover {
-            background-color: #234669;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
         }
 
         .btn-danger {
-            background-color: #e53e3e;
+            background: linear-gradient(45deg, #ff0062, #ff0000);
             border: none;
+            border-radius: 25px;
+            padding: 8px 20px;
+            transition: all 0.3s ease;
         }
 
         .btn-danger:hover {
-            background-color: #c53030;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
         }
 
-        /* Responsive Design */
+        .btn-outline-secondary {
+            color: #e0e0e0;
+            border-color: #0009ff;
+            border-radius: 25px;
+            padding: 8px 20px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-secondary:hover {
+            background: linear-gradient(45deg, #0009ff, #00d4ff);
+            border-color: transparent;
+            transform: translateY(-2px);
+        }
+
+        /* Pagination Styling */
+        .pagination {
+            margin-top: 30px;
+        }
+
+        .page-link {
+            background-color: #2a2a2a;
+            border-color: #333;
+            color: #e0e0e0;
+            padding: 10px 20px;
+            transition: all 0.3s ease;
+        }
+
+        .page-link:hover {
+            background-color: #333;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .page-item.active .page-link {
+            background: linear-gradient(45deg, #0009ff, #00d4ff);
+            border-color: transparent;
+        }
+
+        .page-item.disabled .page-link {
+            background-color: #1a1a1a;
+            color: #666;
+        }
+
+        /* Alert Styling */
+        .alert {
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            animation: fadeInDown 0.5s ease-out;
+        }
+
+        .alert-success {
+            background-color: rgba(40, 167, 69, 0.2);
+            border: 1px solid rgba(40, 167, 69, 0.3);
+            color: #28a745;
+        }
+
+        .alert-danger {
+            background-color: rgba(220, 53, 69, 0.2);
+            border: 1px solid rgba(220, 53, 69, 0.3);
+            color: #dc3545;
+        }
+
+        /* Title Enhancement */
+        .page-title {
+            color: transparent;
+            background: linear-gradient(45deg, #0009ff, #00d4ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Adjustments */
         @media (max-width: 768px) {
-            .table thead {
-                display: none;
-            }
-
-            .table, .table tbody, .table tr, .table td {
-                display: block;
-                width: 100%;
-            }
-
-            .table tr {
-                margin-bottom: 15px;
+            .table-container {
+                padding: 15px;
             }
 
             .table td {
-                text-align: right;
-                padding-left: 50%;
-                position: relative;
+                white-space: nowrap;
             }
 
-            .table td:before {
-                content: attr(data-label);
-                position: absolute;
-                left: 15px;
-                width: 50%;
-                padding-left: 15px;
-                font-weight: bold;
-                text-align: left;
+            .btn {
+                padding: 6px 12px;
+                font-size: 0.875rem;
             }
         }
     </style>
@@ -113,7 +279,8 @@
 <body>
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-        <a class="navbar-brand" th:href="@{/}"><img src="https://pbs.twimg.com/profile_images/1788231088302653440/5xKfAdI8_200x200.jpg" width="40" height="40" alt="rpl"/>RWANDA PREMIER LEAGUE</a>
+        <a class="navbar-brand" th:href="@{/}"><img src="https://i.pinimg.com/originals/3a/23/e6/3a23e6008d880405a27aa59b7072b097.jpg" width="40" height="40" alt="rpl"/>
+            Ihuzo Smart HR Tool</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -122,20 +289,38 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" th:href="@{/dashboard}">Dashboard</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/logout}" th:text="#{logout}">Logout</a>
-                </li>
             </ul>
         </div>
         <ul class="navbar-nav">
+            <!-- Profile Icon with Email -->
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <span th:text="${#locale.language == 'en' ? 'English' : #locale.language == 'rw' ? 'Kinyarwanda' : 'Français'}"></span>
+                <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-person-circle" style="font-size: 30px;"></i>
                 </a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
-                    <li><a class="dropdown-item" th:href="@{''(lang=en)}">English</a></li>
-                    <li><a class="dropdown-item" th:href="@{''(lang=rw)}">Kinyarwanda</a></li>
-                    <li><a class="dropdown-item" th:href="@{''(lang=fr)}">Français</a></li>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                    <!-- Email Displayed Below the Icon -->
+                    <li th:if="${user != null}">
+                        <a class="dropdown-item" href="#">
+                            <span th:text="${user?.email}">User Email</span>
+                        </a>
+                    </li>
+                    <!-- Language Selection -->
+                    <li class="dropdown-item dropdown">
+                        <a class="dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span th:text="${#locale.language == 'en' ? 'English' : #locale.language == 'rw' ? 'Kinyarwanda' : 'Français'}"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" th:href="@{''(lang=en)}">English</a></li>
+                            <li><a class="dropdown-item" th:href="@{''(lang=rw)}">Kinyarwanda</a></li>
+                            <li><a class="dropdown-item" th:href="@{''(lang=fr)}">Français</a></li>
+                        </ul>
+                    </li>
+                    <!-- Logout -->
+                    <li>
+                        <a class="dropdown-item" th:href="@{/logout}">
+                            <i class="bi bi-box-arrow-right"></i> <span th:text="#{logout}">Logout</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
         </ul>
@@ -143,59 +328,101 @@
 </nav>
 
 <div class="container mt-5">
-    <h1 th:text="#{registered_players}">Registered Players</h1>
-    <div th:if="${messageError}">
-        <div class="alert alert-danger" th:text="${messageError}"></div>
+    <h1 class="page-title" th:text="#{registered_players}">Registered Employees</h1>
+
+    <!-- Alerts -->
+    <div th:if="${messageError}" class="alert alert-danger" role="alert">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+        <span th:text="${messageError}"></span>
     </div>
-    <div th:if="${messageSuccess}">
-        <div class="alert alert-success" th:text="${messageSuccess}"></div>
+    <div th:if="${messageSuccess}" class="alert alert-success" role="alert">
+        <i class="bi bi-check-circle-fill me-2"></i>
+        <span th:text="${messageSuccess}"></span>
     </div>
+
     <div class="table-container">
-        <form th:action="@{/users}" method="get">
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Search" name="search" th:value="${search}">
-                <button class="btn btn-outline-secondary" type="submit">Search</button>
-            </div>
-        </form>
+        <!-- Search Form -->
+        <div class="search-container">
+            <form th:action="@{/users}" method="get" class="mb-0">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search users..." name="search" th:value="${search}">
+                    <button class="btn btn-outline-secondary" type="submit">
+                        <i class="bi bi-search me-2"></i>Search
+                    </button>
+                </div>
+            </form>
+        </div>
 
-        <table class="table table-hover">
-            <thead>
-            <tr>
-                <th><a th:href="@{/users(sort='firstName', dir=${sortField == 'firstName' ? reverseSortDir : 'asc'})}">First Name</a></th>
-                <th><a th:href="@{/users(sort='lastName', dir=${sortField == 'lastName' ? reverseSortDir : 'asc'})}">Last Name</a></th>
-                <th><a th:href="@{/users(sort='email', dir=${sortField == 'email' ? reverseSortDir : 'asc'})}">Email</a></th>
-                <th><a th:href="@{/users(sort='roles[0].name', dir=${sortField == 'roles[0].name' ? reverseSortDir : 'asc'})}">Role</a></th>
-                <th><a th:href="@{/users(sort='phoneNumber', dir=${sortField == 'phoneNumber' ? reverseSortDir : 'asc'})}">Phone Number</a></th>
-                <th><a th:href="@{/users(sort='dateOfBirth', dir=${sortField == 'dateOfBirth' ? reverseSortDir : 'asc'})}">Date of Birth</a></th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="user: ${users}">
-                <td th:text="${user.firstName}"></td>
-                <td th:text="${user.lastName}"></td>
-                <td th:text="${user.email}"></td>
-                <td th:text="${user.roles[0].name}"></td>
-                <td th:text="${user.phoneNumber}"></td>
-                <td th:text="${#temporals.format(user.dateOfBirth, 'dd-MM-yyyy')}"></td>
-                <td>
-                    <a th:href="@{/users/edit/{id}(id=${user.id})}" class="btn btn-primary btn-sm">Edit</a>
-                    <a th:href="@{/users/delete/{id}(id=${user.id})}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this user?')">Delete</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+        <!-- Table -->
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th><a th:href="@{/users(sort='firstName', dir=${sortField == 'firstName' ? reverseSortDir : 'asc'})}">
+                        First Name <i class="bi bi-arrow-down-up ms-1"></i>
+                    </a></th>
+                    <th><a th:href="@{/users(sort='lastName', dir=${sortField == 'lastName' ? reverseSortDir : 'asc'})}">
+                        Last Name <i class="bi bi-arrow-down-up ms-1"></i>
+                    </a></th>
+                    <th><a th:href="@{/users(sort='email', dir=${sortField == 'email' ? reverseSortDir : 'asc'})}">
+                        Email <i class="bi bi-arrow-down-up ms-1"></i>
+                    </a></th>
+                    <th><a th:href="@{/users(sort='roles[0].name', dir=${sortField == 'roles[0].name' ? reverseSortDir : 'asc'})}">
+                        Role <i class="bi bi-arrow-down-up ms-1"></i>
+                    </a></th>
+                    <th><a th:href="@{/users(sort='phoneNumber', dir=${sortField == 'phoneNumber' ? reverseSortDir : 'asc'})}">
+                        Phone Number <i class="bi bi-arrow-down-up ms-1"></i>
+                    </a></th>
+                    <th><a th:href="@{/users(sort='dateOfBirth', dir=${sortField == 'dateOfBirth' ? reverseSortDir : 'asc'})}">
+                        Date of Birth <i class="bi bi-arrow-down-up ms-1"></i>
+                    </a></th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user: ${users}">
+                    <td th:text="${user.firstName}"></td>
+                    <td th:text="${user.lastName}"></td>
+                    <td th:text="${user.email}"></td>
+                    <td th:text="${user.roles[0].name}"></td>
+                    <td th:text="${user.phoneNumber}"></td>
+                    <td th:text="${#temporals.format(user.dateOfBirth, 'dd-MM-yyyy')}"></td>
+                    <td>
+                        <div class="btn-group">
+                            <a th:href="@{/users/edit/{id}(id=${user.id})}" class="btn btn-primary btn-sm me-2">
+                                <i class="bi bi-pencil-fill me-1"></i> Edit
+                            </a>
+                            <a th:href="@{/users/delete/{id}(id=${user.id})}"
+                               class="btn btn-danger btn-sm"
+                               onclick="return confirm('Are you sure you want to delete this user?')">
+                                <i class="bi bi-trash-fill me-1"></i> Delete
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
 
+        <!-- Pagination -->
         <nav aria-label="Page navigation">
             <ul class="pagination justify-content-center">
                 <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
-                    <a class="page-link" th:href="@{/users(page=${currentPage - 1}, size=${size}, sort=${sortField}, dir=${sortDir}, search=${search})}">Previous</a>
+                    <a class="page-link" th:href="@{/users(page=${currentPage - 1}, size=${size}, sort=${sortField}, dir=${sortDir}, search=${search})}">
+                        <i class="bi bi-chevron-left"></i> Previous
+                    </a>
                 </li>
-                <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPages - 1)}" th:classappend="${i == currentPage} ? 'active'">
-                    <a class="page-link" th:href="@{/users(page=${i}, size=${size}, sort=${sortField}, dir=${sortDir}, search=${search})}" th:text="${i + 1}">1</a>
+                <li class="page-item"
+                    th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
+                    th:classappend="${i == currentPage} ? 'active'">
+                    <a class="page-link"
+                       th:href="@{/users(page=${i}, size=${size}, sort=${sortField}, dir=${sortDir}, search=${search})}"
+                       th:text="${i + 1}">1</a>
                 </li>
                 <li class="page-item" th:classappend="${currentPage == totalPages - 1} ? 'disabled'">
-                    <a class="page-link" th:href="@{/users(page=${currentPage + 1}, size=${size}, sort=${sortField}, dir=${sortDir}, search=${search})}">Next</a>
+                    <a class="page-link" th:href="@{/users(page=${currentPage + 1}, size=${size}, sort=${sortField}, dir=${sortDir}, search=${search})}">
+                        Next <i class="bi bi-chevron-right"></i>
+                    </a>
                 </li>
             </ul>
         </nav>
