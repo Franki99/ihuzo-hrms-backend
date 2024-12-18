@@ -5,94 +5,232 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RWANDA PREMIER LEAGUE - Edit Profile</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <style>
-        /* General Styling */
-        body {
-            background-color: #f4f7fc;
-            font-family: 'Roboto', sans-serif;
+        /* Dark Mode Styling */
+    body {
+      background-color: #121212;
+      color: #e0e0e0;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    .navbar {
+      background: linear-gradient(90deg, #090979, #0009ff, #00d4ff);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 15px;
+    }
+
+    .navbar-brand {
+      color: #ffffff !important;
+      font-weight: bold;
+    }
+
+    .nav-link {
+      color: #ffffff !important;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 8px 15px;
+      margin: 0 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .nav-link:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Dropdown Menu Styling */
+        .dropdown-menu {
+            background-color: #1e1e1e;
+            border: 1px solid #333;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
 
-        /* Navbar Styling */
-        .navbar {
-            background: linear-gradient(90deg,  #2c5282, #4299e1);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        .dropdown-item {
+            color: #e0e0e0;
+            transition: background-color 0.3s ease;
         }
 
-        .navbar-brand {
-            font-weight: bold;
-            color: #fff !important;
+        .dropdown-item:hover {
+            background-color: #333;
+            color: #fff;
         }
 
-        .nav-link {
-            color: #fff !important;
-            margin-left: 15px;
-        }
-
-        .nav-link:hover {
-            color: #a0aec0 !important;
-        }
-
-        /* Card Styling */
+        /* Enhanced Card Styling */
         .card {
             border: none;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
             margin-top: 40px;
+            background-color: #1e1e1e;
+            border-radius: 15px;
+            animation: fadeInUp 0.8s ease-out;
         }
 
         .card-header {
-            background-color: #2c5282;
+            background: linear-gradient(90deg, #0009ff, #090979, #00d4ff) !important;
             color: white;
             font-weight: bold;
             text-transform: uppercase;
+            border-radius: 15px 15px 0 0 !important;
+            padding: 1.5rem;
         }
 
         .card-body {
-            padding: 20px;
+            padding: 30px;
         }
 
         /* Form Styling */
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            animation: fadeInUp 0.8s ease-out;
         }
 
         .form-label {
-            font-weight: bold;
-            color: #2c5282;
+            font-weight: 600;
+            color: #00d4ff;
+            margin-bottom: 10px;
+            display: block;
         }
 
         .form-control {
-            border-radius: 5px;
-            padding: 10px;
+            background-color: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            color: #e0e0e0;
+            border-radius: 10px;
+            padding: 12px;
+            transition: all 0.3s ease;
         }
 
         .form-control:focus {
-            box-shadow: none;
-            border-color: #2c5282;
+            background-color: #2a2a2a;
+            border-color: #0009ff;
+            color: #e0e0e0;
+            box-shadow: 0 0 0 0.25rem rgba(0, 9, 255, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .form-control:disabled,
+        .form-control[readonly] {
+            background-color: #252525;
+            opacity: 0.7;
         }
 
         /* Button Styling */
+        .btn {
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
         .btn-primary {
-            background-color: #2c5282;
+            background: linear-gradient(45deg, #0009ff, #00d4ff);
             border: none;
         }
 
         .btn-primary:hover {
-            background-color: #234669;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
         }
 
         .btn-secondary {
-            background-color: #a0aec0;
+            background: linear-gradient(45deg, #333, #666);
             border: none;
         }
 
         .btn-secondary:hover {
-            background-color: #718096;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 102, 102, 0.3);
         }
 
-        /* Responsive Adjustments */
+        /* Alert Styling */
+        .alert {
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            color: #00d4ff;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            animation: fadeInDown 0.5s ease-out;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Error Message Styling */
+        .text-danger {
+            color: #ff4d4d !important;
+            font-size: 0.875rem;
+            margin-top: 5px;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        /* Date Input Styling */
+        input[type="date"] {
+            color-scheme: dark;
+        }
+
+        /* Form Section Spacing */
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        /* Button Group Styling */
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        /* Page Title */
+        .page-title {
+            color: transparent;
+            background: linear-gradient(45deg, #0009ff, #00d4ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
             .card {
                 margin-top: 20px;
+            }
+
+            .card-body {
+                padding: 20px;
+            }
+
+            .btn {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .btn-group {
+                flex-direction: column;
             }
         }
     </style>
@@ -100,29 +238,51 @@
 <body>
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-        <a class="navbar-brand" th:href="@{/}"><img src="https://pbs.twimg.com/profile_images/1788231088302653440/5xKfAdI8_200x200.jpg" width="40" height="40" alt="rpl"/>RWANDA PREMIER LEAGUE</a>
+        <a class="navbar-brand" th:href="@{/}"><img src="https://i.pinimg.com/originals/3a/23/e6/3a23e6008d880405a27aa59b7072b097.jpg" width="40" height="40" alt="rpl"/>
+            Ihuzo Smart HR Tool</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/profile}">Profile</a>
+                    <a class="nav-link active" aria-current="page" th:href="@{/dashboard}">Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/logout}">Logout</a>
+                    <a class="nav-link" th:href="@{/users}" th:text="#{players}">Employees</a>
                 </li>
             </ul>
         </div>
         <ul class="navbar-nav">
+            <!-- Profile Icon with Email -->
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <span th:text="${#locale.language == 'en' ? 'English' : #locale.language == 'rw' ? 'Kinyarwanda' : 'Français'}"></span>
+                <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-person-circle" style="font-size: 30px;"></i>
                 </a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
-                    <li><a class="dropdown-item" th:href="@{''(lang=en)}">English</a></li>
-                    <li><a class="dropdown-item" th:href="@{''(lang=rw)}">Kinyarwanda</a></li>
-                    <li><a class="dropdown-item" th:href="@{''(lang=fr)}">Français</a></li>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                    <!-- Email Displayed Below the Icon -->
+                    <li th:if="${user != null}">
+                        <a class="dropdown-item" href="#">
+                            <span th:text="${user?.email}">User Email</span>
+                        </a>
+                    </li>
+                    <!-- Language Selection -->
+                    <li class="dropdown-item dropdown">
+                        <a class="dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span th:text="${#locale.language == 'en' ? 'English' : #locale.language == 'rw' ? 'Kinyarwanda' : 'Français'}"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" th:href="@{''(lang=en)}">English</a></li>
+                            <li><a class="dropdown-item" th:href="@{''(lang=rw)}">Kinyarwanda</a></li>
+                            <li><a class="dropdown-item" th:href="@{''(lang=fr)}">Français</a></li>
+                        </ul>
+                    </li>
+                    <!-- Logout -->
+                    <li>
+                        <a class="dropdown-item" th:href="@{/logout}">
+                            <i class="bi bi-box-arrow-right"></i> <span th:text="#{logout}">Logout</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
         </ul>
@@ -130,53 +290,87 @@
 </nav>
 
 <div class="container">
-    <div class="row col-md-8 offset-md-2">
-        <div class="card">
-            <div class="card-header">
-                <h2 class="text-center">Edit Profile</h2>
-            </div>
-            <div th:if="${param.success}">
-                <div class="alert alert-info">
-                    Your profile has been updated successfully!
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h1 class="page-title">Edit Profile</h1>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-center mb-0">Personal Information</h2>
                 </div>
-            </div>
-            <div class="card-body">
-                <form method="post" role="form" th:action="@{/users/update/{id}(id=${user.id})}" th:object="${user}">
-                    <input type="hidden" th:field="*{id}" />
-                    <div class="form-group">
-                        <label for="firstName" class="form-label">First Name</label>
-                        <input class="form-control" id="firstName" name="firstName" placeholder="Enter first name" th:field="*{firstName}" type="text" />
-                        <p th:errors="*{firstName}" class="text-danger" th:if="${#fields.hasErrors('firstName')}"></p>
+                <div class="card-body">
+                    <div th:if="${param.success}" class="alert" role="alert">
+                        <i class="bi bi-check-circle-fill me-2"></i>
+                        Your profile has been updated successfully!
                     </div>
 
-                    <div class="form-group">
-                        <label for="lastName" class="form-label">Last Name</label>
-                        <input class="form-control" id="lastName" name="lastName" placeholder="Enter last name" th:field="*{lastName}" type="text" />
-                        <p th:errors="*{lastName}" class="text-danger" th:if="${#fields.hasErrors('lastName')}"></p>
-                    </div>
+                    <form method="post" role="form" th:action="@{/users/update/{id}(id=${user.id})}" th:object="${user}">
+                        <input type="hidden" th:field="*{id}" />
 
-                    <div class="form-group">
-                        <label for="email" class="form-label">Email</label>
-                        <input class="form-control" id="email" name="email" placeholder="Enter email address" th:field="*{email}" type="email" readonly />
-                    </div>
+                        <div class="form-section">
+                            <div class="form-group">
+                                <label for="firstName" class="form-label">
+                                    <i class="bi bi-person-fill me-2"></i>First Name
+                                </label>
+                                <input class="form-control" id="firstName" name="firstName"
+                                       placeholder="Enter first name" th:field="*{firstName}" type="text" />
+                                <p th:errors="*{firstName}" class="text-danger"
+                                   th:if="${#fields.hasErrors('firstName')}"></p>
+                            </div>
 
-                    <div class="form-group">
-                        <label for="phoneNumber" class="form-label">Phone Number</label>
-                        <input class="form-control" id="phoneNumber" name="phoneNumber" placeholder="Enter phone number" th:field="*{phoneNumber}" type="text" />
-                        <p th:errors="*{phoneNumber}" class="text-danger" th:if="${#fields.hasErrors('phoneNumber')}"></p>
-                    </div>
+                            <div class="form-group">
+                                <label for="lastName" class="form-label">
+                                    <i class="bi bi-person-fill me-2"></i>Last Name
+                                </label>
+                                <input class="form-control" id="lastName" name="lastName"
+                                       placeholder="Enter last name" th:field="*{lastName}" type="text" />
+                                <p th:errors="*{lastName}" class="text-danger"
+                                   th:if="${#fields.hasErrors('lastName')}"></p>
+                            </div>
+                        </div>
 
-                    <div class="form-group">
-                        <label for="dateOfBirth" class="form-label">Date of Birth</label>
-                        <input class="form-control" id="dateOfBirth" name="dateOfBirth" th:field="*{dateOfBirth}" type="date" />
-                        <p th:errors="*{dateOfBirth}" class="text-danger" th:if="${#fields.hasErrors('dateOfBirth')}"></p>
-                    </div>
+                        <div class="form-section">
+                            <div class="form-group">
+                                <label for="email" class="form-label">
+                                    <i class="bi bi-envelope-fill me-2"></i>Email
+                                </label>
+                                <input class="form-control" id="email" name="email"
+                                       placeholder="Enter email address" th:field="*{email}"
+                                       type="email" readonly />
+                            </div>
 
-                    <div class="form-group">
-                        <button class="btn btn-primary" type="submit">Update Profile</button>
-                        <a th:href="@{/profile}" class="btn btn-secondary">Cancel</a>
-                    </div>
-                </form>
+                            <div class="form-group">
+                                <label for="phoneNumber" class="form-label">
+                                    <i class="bi bi-telephone-fill me-2"></i>Phone Number
+                                </label>
+                                <input class="form-control" id="phoneNumber" name="phoneNumber"
+                                       placeholder="Enter phone number" th:field="*{phoneNumber}"
+                                       type="text" />
+                                <p th:errors="*{phoneNumber}" class="text-danger"
+                                   th:if="${#fields.hasErrors('phoneNumber')}"></p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="dateOfBirth" class="form-label">
+                                    <i class="bi bi-calendar-fill me-2"></i>Date of Birth
+                                </label>
+                                <input class="form-control" id="dateOfBirth" name="dateOfBirth"
+                                       th:field="*{dateOfBirth}" type="date" />
+                                <p th:errors="*{dateOfBirth}" class="text-danger"
+                                   th:if="${#fields.hasErrors('dateOfBirth')}"></p>
+                            </div>
+                        </div>
+
+                        <div class="btn-group">
+                            <button class="btn btn-primary" type="submit">
+                                <i class="bi bi-check-circle-fill me-2"></i>Update Profile
+                            </button>
+                            <a th:href="@{/profile}" class="btn btn-secondary">
+                                <i class="bi bi-x-circle-fill me-2"></i>Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
