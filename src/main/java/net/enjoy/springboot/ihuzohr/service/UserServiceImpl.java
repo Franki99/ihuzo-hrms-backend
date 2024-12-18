@@ -120,6 +120,11 @@ public class UserServiceImpl implements UserService {
     }
 
     public Page<User> searchUsers(String search, Pageable pageable) {
-        return userRepository.findByFirstNameContainingOrLastNameContainingOrEmailContaining(search, search, search, pageable);
+        try {
+            return userRepository.findBySearchTerm(search, pageable);
+        } catch (Exception e) {
+            System.err.println("Error in searchUsers: " + e.getMessage());
+            throw e;
+        }
     }
 }

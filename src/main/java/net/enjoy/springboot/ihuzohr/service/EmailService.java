@@ -21,10 +21,10 @@ public class EmailService {
     @Value("${spring.mail.username}")
     private String fromAddress;
 
-    public EmailService() {
-        this.mailSender = null;
-        this.templateEngine = new TemplateEngine();
-    }
+//    public EmailService() {
+//        this.mailSender = null;
+//        this.templateEngine = new TemplateEngine();
+//    }
 
     // Sending normal simple email
 //    public void sendEmail(String to, String subject, String body) {
@@ -43,22 +43,31 @@ public class EmailService {
 
     // Send email with template
     @Async
-    public void sendEmail(String to, String subject, Context context){
+    public void sendEmail(String to, String subject, Context context) {
         try {
+            log.info("Starting email sending process...");
+            log.info("To: {}", to);
+            log.info("Subject: {}", subject);
+            log.info("From: {}", fromAddress);
+
             MimeMessage mimeMessage = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "UTF-8");
 
-            helper.setFrom("Rwanda Premier League <" + fromAddress + ">");
+            helper.setFrom("Ihuzo Smart HR Tool <" + fromAddress + ">");
             helper.setSubject(subject);
             helper.setTo(to);
 
+            log.info("Processing email template...");
             String htmlContent = templateEngine.process("notification-email", context);
+            log.info("Template processed successfully");
             helper.setText(htmlContent, true);
 
+            log.info("Attempting to send email...");
             mailSender.send(mimeMessage);
-            log.info("Email sent successfully, to: {}", to);
+            log.info("Email sent successfully to: {}", to);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.error("Failed to send email. Error: {}", e.getMessage());
+            e.printStackTrace();
         }
     }
 }

@@ -2,43 +2,52 @@ package net.enjoy.springboot.ihuzohr.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.Objects;
 
 @Service
 public class FileStorageService {
-
     public static final String STORAGE_DIRECTORY = "C:\\Users\\hp\\Documents\\pictures";
-//    public static final String STORAGE_DIRECTORY = "D:\\Storage";
 
-    public String saveFile(MultipartFile fileToSave) throws IOException {
-        if (fileToSave == null) {
-            throw new NullPointerException("fileToSave is null");
+    public FileStorageService() {
+        // Create directory if it doesn't exist
+        File directory = new File(STORAGE_DIRECTORY);
+        if (!directory.exists()) {
+            directory.mkdirs();
         }
-        var targetFile = new File(STORAGE_DIRECTORY + File.separator + fileToSave.getOriginalFilename());
-        if (!Objects.equals(targetFile.getParent(), STORAGE_DIRECTORY)) {
-            throw new SecurityException("Unsupported filename!");
-        }
-        Files.copy(fileToSave.getInputStream(), targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-        return targetFile.getPath();
     }
 
-    public File getDownloadFile(String fileName) throws Exception {
-        if (fileName == null) {
-            throw new NullPointerException("fileName is null");
+    public String saveFile(MultipartFile fileToSave) throws IOException {
+        if (fileToSave == null || fileToSave.isEmpty()) {
+            throw new IllegalArgumentException("File is empty or null");
         }
-        var fileToDownload = new File(fileName);
-        if (!Objects.equals(fileToDownload.getParent(), STORAGE_DIRECTORY)) {
-            throw new SecurityException("Unsupported filename!");
+
+        // Generate filename with timestamp
+        String originalFilename = fileToSave.getOriginalFilename();
+        String filename = System.currentTimeMillis() + "_" + originalFilename;
+        Path targetLocation = Paths.get(STORAGE_DIRECTORY).resolve(filename);
+
+        Files.copy(fileToSave.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
+        return filename; // Return only filename, not full path
+    }
+
+    public File getDownloadFile(String fileName) throws IOException {
+        Path filePath = Paths.get(STORAGE_DIRECTORY).resolve(fileName).normalize();
+        File file = filePath.toFile();
+
+        if (!file.exists()) {
+            throw new IOException("File not found: " + fileName);
         }
-        if (!fileToDownload.exists()) {
-            throw new FileNotFoundException("No file named: " + fileName);
+
+        // Security check
+        if (!file.getCanonicalPath().startsWith(new File(STORAGE_DIRECTORY).getCanonicalPath())) {
+            throw new IOException("Access denied");
         }
-        return fileToDownload;
+
+        return file;
     }
 }
