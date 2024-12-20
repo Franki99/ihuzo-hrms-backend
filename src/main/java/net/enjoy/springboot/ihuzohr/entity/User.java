@@ -38,7 +38,7 @@ public class User {
     @Column(nullable = false)
     private String phoneNumber;
 
-    @Column
+    @Column(columnDefinition = "TEXT")  // Changed to TEXT to store longer URLs
     private String profilePicture;
 
     @Column(nullable = false)
