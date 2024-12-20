@@ -1,5 +1,6 @@
 package net.enjoy.springboot.ihuzohr.service;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
@@ -11,13 +12,22 @@ import java.nio.file.StandardCopyOption;
 
 @Service
 public class FileStorageService {
-    public static final String STORAGE_DIRECTORY = "C:\\Users\\hp\\Documents\\pictures";
+    private final String storageDirectory;
 
-    public FileStorageService() {
-        // Create directory if it doesn't exist
-        File directory = new File(STORAGE_DIRECTORY);
-        if (!directory.exists()) {
-            directory.mkdirs();
+    public FileStorageService(@Value("${file.upload-dir:#{systemProperties['java.io.tmpdir']}/uploads}") String storageDirectory) {
+        this.storageDirectory = storageDirectory;
+        initializeStorageDirectory();
+    }
+
+    private void initializeStorageDirectory() {
+        try {
+            File directory = new File(storageDirectory);
+            if (!directory.exists()) {
+                directory.mkdirs();
+            }
+            System.out.println("Storage directory initialized at: " + directory.getAbsolutePath());
+        } catch (Exception e) {
+            throw new RuntimeException("Could not initialize storage directory", e);
         }
     }
 
@@ -29,14 +39,14 @@ public class FileStorageService {
         // Generate filename with timestamp
         String originalFilename = fileToSave.getOriginalFilename();
         String filename = System.currentTimeMillis() + "_" + originalFilename;
-        Path targetLocation = Paths.get(STORAGE_DIRECTORY).resolve(filename);
+        Path targetLocation = Paths.get(storageDirectory).resolve(filename);
 
         Files.copy(fileToSave.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
-        return filename; // Return only filename, not full path
+        return filename; // Return only filename
     }
 
     public File getDownloadFile(String fileName) throws IOException {
-        Path filePath = Paths.get(STORAGE_DIRECTORY).resolve(fileName).normalize();
+        Path filePath = Paths.get(storageDirectory).resolve(fileName).normalize();
         File file = filePath.toFile();
 
         if (!file.exists()) {
@@ -44,7 +54,7 @@ public class FileStorageService {
         }
 
         // Security check
-        if (!file.getCanonicalPath().startsWith(new File(STORAGE_DIRECTORY).getCanonicalPath())) {
+        if (!file.getCanonicalPath().startsWith(new File(storageDirectory).getCanonicalPath())) {
             throw new IOException("Access denied");
         }
 
