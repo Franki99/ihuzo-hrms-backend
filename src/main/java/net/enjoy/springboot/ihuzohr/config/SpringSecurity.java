@@ -77,17 +77,18 @@ public class SpringSecurity {
                                 // Public endpoints
                                 .requestMatchers("/api/auth/**").permitAll()
                                 .requestMatchers("/api/register").permitAll()
-                                .requestMatchers("/api/auth/forgot-password").permitAll()
+                                .requestMatchers("/api/auth/forgot-password").permitAll()  // Add this explicitly
                                 .requestMatchers("/api/auth/reset-password/**").permitAll()
                                 .requestMatchers("/register/**").permitAll()
                                 .requestMatchers("/").permitAll()
                                 .requestMatchers("/index").permitAll()
-                                // Profile Pictures - Move these before the admin endpoints
-                                .requestMatchers("/api/users/profile-picture/**").permitAll()  // Allow all access to profile pictures
+                                // Allow GET access to profile pictures
+                                .requestMatchers(HttpMethod.GET, "/api/users/profile-picture/**").permitAll()
+                                // Require authentication for uploading profile pictures
                                 .requestMatchers(HttpMethod.POST, "/api/users/profile-picture/**").authenticated()
                                 .requestMatchers("/forgot-password").permitAll()
                                 .requestMatchers("/reset-password").permitAll()
-                                // Admin endpoints - Move this after profile pictures
+                                // Admin endpoints
                                 .requestMatchers("/api/users/**").hasRole("ADMIN")
                                 .anyRequest().authenticated()
                 )

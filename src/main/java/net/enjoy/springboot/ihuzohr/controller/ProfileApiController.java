@@ -14,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import java.io.File;
 
 import java.security.Principal;
 import java.util.HashMap;
@@ -44,24 +45,19 @@ public class ProfileApiController {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
             }
 
-            // Log current user state
-            logger.info("Current user before update - ID: {}, Email: {}, Current Profile Picture: {}",
-                    user.getId(), user.getEmail(), user.getProfilePicture());
-
             // Save file and get filename only
             String savedFileName = fileStorageService.saveFile(file);
-            logger.info("File saved with name: {}", savedFileName);
+            // Extract just the filename if it's a full path
+            String actualFilename = new File(savedFileName).getName();
 
-            user.setProfilePicture(savedFileName); // Store only filename
+            logger.info("File saved with name: {}", actualFilename);
+
+            user.setProfilePicture(actualFilename); // Store only filename
             User savedUser = userRepository.save(user);
-
-            // Log saved user state
-            logger.info("User after update - ID: {}, Email: {}, New Profile Picture: {}",
-                    savedUser.getId(), savedUser.getEmail(), savedUser.getProfilePicture());
 
             Map<String, String> response = new HashMap<>();
             response.put("message", "Profile picture updated successfully");
-            response.put("profilePicture", savedFileName);
+            response.put("profilePicture", actualFilename);
 
             return ResponseEntity.ok(response);
         } catch (Exception e) {
@@ -75,18 +71,23 @@ public class ProfileApiController {
     public ResponseEntity<Resource> getProfilePicture(@PathVariable String filename) {
         try {
             logger.info("Requesting profile picture: {}", filename);
-            var file = fileStorageService.getDownloadFile(filename);
+
+            // Extract just the filename if it's a full path
+            String actualFilename = new File(filename).getName();
+            logger.info("Extracted filename: {}", actualFilename);
+
+            var file = fileStorageService.getDownloadFile(actualFilename);
 
             // Log file details
             logger.info("Found file: exists={}, path={}, size={}",
                     file.exists(), file.getAbsolutePath(), file.length());
 
-            String contentType = determineContentType(filename);
+            String contentType = determineContentType(actualFilename);
             Resource resource = new FileSystemResource(file);
 
             return ResponseEntity.ok()
                     .contentType(MediaType.parseMediaType(contentType))
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + filename + "\"")
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + actualFilename + "\"")
                     .body(resource);
         } catch (Exception e) {
             logger.error("Error retrieving profile picture: {} - Error: {}", filename, e.getMessage());
